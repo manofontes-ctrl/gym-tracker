@@ -218,6 +218,7 @@ export default function App() {
 
   useEffect(() => setData(load()), []);
   useEffect(() => save(data), [data]);
+  useEffect(() => {document.body.style.overflow = selected ? "hidden" : ""; return () => { document.body.style.overflow = ""; };}, [selected]);
 
   const session = data.sessions[sessionKey];
 
@@ -426,8 +427,8 @@ export default function App() {
     .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
     .mini{font-size:12px;color:var(--muted2)}
     .toggle{font-size:12px;color:var(--muted);border:1px solid var(--border);background:rgba(255,255,255,.03);border-radius:999px;padding:6px 10px;cursor:pointer;}
-    .modalOverlay{position:fixed;inset:0;background:rgba(0,0,0,.45);display:grid;place-items:center;padding:14px;}
-    .modal{width:100%;max-width:520px;background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+    .modalOverlay{position:fixed;inset:0;background:rgba(0,0,0,.55);display:grid;place-items:center;padding:14px;z-index:9999}
+    .modal{width:100%;max-width:520px;max-height:calc(100vh-28px);overflow:auto;background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
            border:1px solid var(--border);border-radius:20px;padding:14px;}
     .setGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
     .kpi{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
