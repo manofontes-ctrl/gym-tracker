@@ -206,8 +206,7 @@ function toCSV(logs) {
     return row.map((v) => `"${String(v).replace(/"/g, '""')}"`).join(",");
   });
 
-  return [headers.join(","), ...rows].join("
-");
+  return [headers.join(","), ...rows].join("\n");
 }
 
 function pill(text) {
