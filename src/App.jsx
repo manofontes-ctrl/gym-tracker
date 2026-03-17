@@ -1,8 +1,33 @@
 import React, { useEffect, useMemo, useState } from "react";
 
-const LS_KEY = "gym_tracker_simple_v2";
+const LS_KEY = "gym_tracker_simple_v3";
 
 // --- Quick warm-up / cool-down (5 min each) ---
+const EXERCISE_INFO = {
+  "Incline DB Press": { sets: "4 × 6–10", notes: ["Bench ~30° incline", "Shoulder blades back", "Lower slowly to upper chest", "Do not flare elbows too wide"] },
+  "Chest-Supported Row": { sets: "4 × 8–12", notes: ["Chest firmly on bench", "Pull elbows toward hips", "Squeeze shoulder blades", "Avoid jerking weight"] },
+  "Seated DB Shoulder Press": { sets: "3 × 8–10", notes: ["Core tight, back neutral", "Dumbbells slightly forward of head", "Do not arch lower back", "Controlled lockout"] },
+  "Neutral-Grip Lat Pulldown": { sets: "3 × 8–12", notes: ["Lean slightly back", "Pull elbows toward ribs", "Chest up, shoulders down", "Control the return"] },
+  "Cable Fly (Low to High)": { sets: "3 × 12–15", notes: ["Slight bend in elbows", "Lift arms upward in an arc", "Squeeze chest at top", "Slow eccentric"] },
+  "Face Pull": { sets: "3 × 12–15", notes: ["Pull rope toward face", "Elbows high and wide", "Focus on rear delts", "Pause at contraction"] },
+  "Hammer Curl": { sets: "3 × 10–12", notes: ["Neutral grip", "Elbows fixed at sides", "No body swing", "Slow lowering"] },
+  "Overhead Rope Extension": { sets: "3 × 10–12", notes: ["Elbows pointing forward", "Stretch triceps fully", "Keep upper arms still", "Control return"] },
+  "Front Squat": { sets: "4 × 5–8", notes: ["Elbows high", "Chest upright", "Sit between hips", "Drive through midfoot"] },
+  "Romanian Deadlift": { sets: "3 × 6–8", notes: ["Slight knee bend", "Push hips backward", "Keep bar close to legs", "Feel hamstring stretch"] },
+  "Rear-Foot Elevated Split Squat": { sets: "3 × 8/leg", notes: ["Long stance", "Knee tracks over toes", "Torso upright", "Slow controlled descent"] },
+  "Seated Hamstring Curl": { sets: "3 × 10–12", notes: ["Hips fixed in seat", "Full squeeze at bottom", "Control extension", "Avoid momentum"] },
+  "Standing Calf Raise": { sets: "4 × 10–15", notes: ["Full stretch at bottom", "Pause at top", "Slow tempo", "Do not bounce"] },
+  "Tibialis Raise": { sets: "3 × 15–20", notes: ["Lean against wall", "Lift toes toward shins", "Control lowering", "Helps running resilience"] },
+  "Step-Up to Knee Drive": { sets: "3 × 8/leg", notes: ["Drive through front heel", "Lift opposite knee high", "Keep hips level", "Controlled descent"] },
+  "Weighted Cable Crunch": { sets: "4 × 10–15", notes: ["Curl spine downward", "Do not hinge at hips", "Exhale on crunch", "Slow return"] },
+  "Hanging Knee / Toe Raise": { sets: "4 × 8–12", notes: ["Posterior pelvic tilt", "Avoid swinging", "Lift knees or toes high", "Slow negative"] },
+  "Ab Wheel Rollout": { sets: "3 × 8–12", notes: ["Glutes tight", "Neutral spine", "Roll only as far as control allows", "Do not sag lower back"] },
+  "45° Back Extension": { sets: "3 × 10–15", notes: ["Hinge at hips", "Neutral spine", "Squeeze glutes at top", "Avoid hyperextension"] },
+  "Pallof Press": { sets: "3 × 12/side", notes: ["Stand tall", "Resist rotation", "Core tight", "Slow extension"] },
+  "Side Plank Reach": { sets: "3 × 10/side", notes: ["Straight line body", "Reach under then rotate open", "Keep hips lifted"] },
+  "Suitcase Carry": { sets: "3 × 30–45 sec/side", notes: ["One dumbbell only", "Walk slowly", "Do not lean sideways", "Core tight"] },
+};
+
 const WARMUP = {
   A: [
     "Row / SkiErg – 2:00 easy",
@@ -44,38 +69,38 @@ const DEFAULT = {
     A: {
       name: "A – Upper Body",
       exercises: [
-        "Bench Press",
-        "Pull-ups / Lat Pulldown",
-        "DB Shoulder Press",
         "Incline DB Press",
-        "Seated Cable Row",
-        "Lateral Raises",
-        "Barbell Curl",
-        "Rope Pushdown",
+        "Chest-Supported Row",
+        "Seated DB Shoulder Press",
+        "Neutral-Grip Lat Pulldown",
+        "Cable Fly (Low to High)",
+        "Face Pull",
+        "Hammer Curl",
+        "Overhead Rope Extension",
       ],
     },
     B: {
       name: "B – Lower Body (Running)",
       exercises: [
-        "Back Squat",
+        "Front Squat",
         "Romanian Deadlift",
-        "Bulgarian Split Squat",
-        "Leg Press",
-        "Hamstring Curl",
+        "Rear-Foot Elevated Split Squat",
+        "Seated Hamstring Curl",
         "Standing Calf Raise",
-        "Single-Leg Step-Up",
+        "Tibialis Raise",
+        "Step-Up to Knee Drive",
       ],
     },
     C: {
       name: "C – Core & Lower Back",
       exercises: [
-        "Hanging Leg Raises",
-        "Cable Crunch",
+        "Weighted Cable Crunch",
+        "Hanging Knee / Toe Raise",
         "Ab Wheel Rollout",
-        "Back Extension (45°)",
-        "Dead Bug",
+        "45° Back Extension",
         "Pallof Press",
-        "Farmer’s Carry",
+        "Side Plank Reach",
+        "Suitcase Carry",
       ],
     },
   },
@@ -174,14 +199,16 @@ function toCSV(logs) {
       g(2, "r"),
       g(3, "w"),
       g(3, "r"),
-      (l.notes || "").replace(/\n/g, " "),
+      (l.notes || "").replace(/
+/g, " "),
       Math.round(vol),
     ];
 
     return row.map((v) => `"${String(v).replace(/"/g, '""')}"`).join(",");
   });
 
-  return [headers.join(","), ...rows].join("\n");
+  return [headers.join(","), ...rows].join("
+");
 }
 
 function pill(text) {
@@ -218,10 +245,9 @@ export default function App() {
 
   useEffect(() => setData(load()), []);
   useEffect(() => save(data), [data]);
-  useEffect(() => {document.body.style.overflow = selected ? "hidden" : ""; return () => { document.body.style.overflow = ""; };}, [selected]);
-useEffect(() => {document.body.style.overflow = selected ? "hidden" : "";return () => { document.body.style.overflow = ""; };}, [selected]);
 
   const session = data.sessions[sessionKey];
+  const selectedInfo = selected ? EXERCISE_INFO[selected] : null;
 
   const exercises = useMemo(() => {
     const q = search.trim().toLowerCase();
@@ -304,10 +330,25 @@ useEffect(() => {document.body.style.overflow = selected ? "hidden" : "";return 
 
     const maxWeekly = weeklySeries.reduce((m, x) => Math.max(m, x.vol), 0) || 1;
 
+    const sessionTotals = ["A", "B", "C"].map((k) => ({
+      key: k,
+      label: data.sessions[k]?.name || k,
+      volume: Math.round(
+        data.logs
+          .filter((l) => l.sessionKey === k)
+          .reduce((acc, l) => acc + volumeOfLog(l), 0)
+      ),
+      logs: data.logs.filter((l) => l.sessionKey === k).length,
+    }));
+
+    const maxSessionVolume = sessionTotals.reduce((m, x) => Math.max(m, x.volume), 0) || 1;
+
     return {
       byExercise: [...byExercise.values()].sort((a, b) => a.exercise.localeCompare(b.exercise)),
       weeklySeries,
       maxWeekly,
+      sessionTotals,
+      maxSessionVolume,
     };
   }, [data.logs]);
 
@@ -428,38 +469,9 @@ useEffect(() => {document.body.style.overflow = selected ? "hidden" : "";return 
     .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
     .mini{font-size:12px;color:var(--muted2)}
     .toggle{font-size:12px;color:var(--muted);border:1px solid var(--border);background:rgba(255,255,255,.03);border-radius:999px;padding:6px 10px;cursor:pointer;}
-    /* --- Mobile-friendly, fully opaque modal --- */
-.modalOverlay{
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,.78); /* darker background */
-  z-index: 9999;
-
-  display: flex;
-  align-items: flex-end; /* bottom sheet style */
-}
-
-.modal{
-  width: 100%;
-  max-height: 90vh;
-  overflow-y: auto;
-
-  background: #0b0f19; /* fully opaque */
-  border: 1px solid rgba(255,255,255,.10);
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-
-  padding: 18px;
-  padding-bottom: 34px; /* keeps buttons above Android nav bar */
-
-  box-shadow: 0 -10px 40px rgba(0,0,0,.65);
-  animation: slideUp 0.25s ease-out;
-}
-
-@keyframes slideUp{
-  from { transform: translateY(100%); }
-  to { transform: translateY(0); }
-}
+    .modalOverlay{position:fixed;inset:0;background:rgba(0,0,0,.45);display:grid;place-items:center;padding:14px;}
+    .modal{width:100%;max-width:520px;background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+           border:1px solid var(--border);border-radius:20px;padding:14px;}
     .setGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
     .kpi{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
     .kpiCard{border:1px solid var(--border);border-radius:18px;padding:12px;background:rgba(255,255,255,.03)}
@@ -481,7 +493,7 @@ useEffect(() => {document.body.style.overflow = selected ? "hidden" : "";return 
             <div className="title">Gym Tracker</div>
             <div className="sub">Fast kg × reps logging • offline • export CSV</div>
           </div>
-          <div className="badge">{pill("v2")}</div>
+          <div className="badge">{pill("v3")}</div>
         </div>
 
         <div className="tabs">
@@ -563,13 +575,19 @@ useEffect(() => {document.body.style.overflow = selected ? "hidden" : "";return 
               <div className="grid">
                 {exercises.map((ex) => {
                   const last = lastFor(ex);
+                  const info = EXERCISE_INFO[ex];
                   const sub = last
                     ? `Last: ${last.sets?.[0]?.w || "—"}kg × ${last.sets?.[0]?.r || "—"} • ${fmt(last.ts)}`
-                    : "No history yet";
+                    : info?.sets
+                      ? `Recommended: ${info.sets}`
+                      : "No history yet";
                   return (
                     <button key={ex} className="cardBtn" onClick={() => openExercise(ex)}>
                       <div className="cardTitle">{ex}</div>
                       <div className="cardSub">{sub}</div>
+                      {EXERCISE_INFO[ex]?.notes?.[0] ? (
+                        <div className="mini" style={{ marginTop: 6 }}>{EXERCISE_INFO[ex].notes[0]}</div>
+                      ) : null}
                     </button>
                   );
                 })}
@@ -617,6 +635,19 @@ useEffect(() => {document.body.style.overflow = selected ? "hidden" : "";return 
                 <div className="modal" onClick={(e) => e.stopPropagation()}>
                   <div style={{ fontWeight: 950, fontSize: 16 }}>{selected}</div>
                   <div className="mini">{session.name}</div>
+
+                  {selectedInfo ? (
+                    <div style={{ marginTop: 10 }}>
+                      <div className="pills">
+                        <span>{pill(`Recommended sets: ${selectedInfo.sets}`)}</span>
+                      </div>
+                      <div className="table" style={{ marginTop: 10 }}>
+                        {selectedInfo.notes.map((n, i) => (
+                          <div key={i} className="mini" style={{ lineHeight: 1.4 }}>• {n}</div>
+                        ))}
+                      </div>
+                    </div>
+                  ) : null}
 
                   <div className="setGrid">
                     {sets.slice(0, 4).map((s, idx) => (
@@ -668,7 +699,7 @@ useEffect(() => {document.body.style.overflow = selected ? "hidden" : "";return 
               <div className="panelHead">
                 <div>
                   <div className="h">Performance tracking</div>
-                  <div className="muted">PRs + volume trends</div>
+                  <div className="muted">PRs + volume + session balance</div>
                 </div>
               </div>
 
@@ -686,6 +717,25 @@ useEffect(() => {document.body.style.overflow = selected ? "hidden" : "";return 
                         .reduce((acc, l) => acc + volumeOfLog(l), 0)
                     )}
                   </div>
+                </div>
+              </div>
+
+              <div style={{ marginTop: 14 }}>
+                <div className="mini" style={{ fontWeight: 900, color: "var(--muted)" }}>
+                  Volume by session block
+                </div>
+                <div className="spark">
+                  {stats.sessionTotals.map((x) => {
+                    const h = Math.max(6, Math.round((x.volume / stats.maxSessionVolume) * 52));
+                    return <div key={x.key} title={`${x.label}: ${x.volume}`} style={{ height: h }} />;
+                  })}
+                </div>
+                <div style={{ display: "flex", justifyContent: "space-between", marginTop: 6 }}>
+                  {stats.sessionTotals.map((x) => (
+                    <div key={x.key} className="mini" style={{ width: `${100 / stats.sessionTotals.length}%`, textAlign: "center" }}>
+                      {x.key} · {x.logs}
+                    </div>
+                  ))}
                 </div>
               </div>
 
