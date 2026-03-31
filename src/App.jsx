@@ -236,6 +236,7 @@ export default function App() {
     { w: "", r: "" },
     { w: "", r: "" },
     { w: "", r: "" },
+    { w: "", r: "" },
   ]);
   const [notes, setNotes] = useState("");
   const [showWU, setShowWU] = useState(true);
@@ -647,7 +648,7 @@ export default function App() {
                   ) : null}
 
                   <div className="setGrid">
-                    {sets.slice(0, 4).map((s, idx) => (
+                    {sets.map((s, idx) => (
                       <React.Fragment key={idx}>
                         <input
                           className="input"
