@@ -183,10 +183,10 @@ function load() {
     if (!raw) return DEFAULT;
     const parsed = JSON.parse(raw);
     return {
-      ...DEFAULT,
-      ...parsed,
-      sessions: { ...DEFAULT.sessions, ...(parsed.sessions || {}) },
-      logs: Array.isArray(parsed.logs) ? parsed.logs : [],
+     ...DEFAULT,
+     ...parsed,
+     sessions: DEFAULT.sessions, // always use latest coded plan
+     logs: Array.isArray(parsed.logs) ? parsed.logs : [],
     };
   } catch {
     return DEFAULT;
