@@ -265,8 +265,7 @@ function toCSV(logs) {
       g(2, "r"),
       g(3, "w"),
       g(3, "r"),
-      (l.notes || "").split("
-").join(" "),
+      (l.notes || "").split("\n").join(" "),
       Math.round(vol),
     ];
 
