@@ -650,13 +650,19 @@ export default function App() {
                   return (
                     <button key={ex} className="cardBtn" onClick={() => openExercise(ex)}>
                       <div className="cardTitle">{ex}</div>
-                      <div className="cardSub">{sub}</div>
-                      {EXERCISE_INFO[ex]?.notes?.[0] ? (
-                        <div className="mini" style={{ marginTop: 6 }}>{EXERCISE_INFO[ex].notes[0]}</div>
-                      {EXERCISE_INFO[ex]?.target ? (
-                        <div className="mini" style={{ marginTop: 4, opacity: 0.9 }}>Target: {EXERCISE_INFO[ex].target}</div>
-                      ) : null}
-                      ) : null}
+		      <div className="cardSub">{sub}</div>
+
+		   {EXERCISE_INFO[ex]?.notes?.[0] ? (
+		     <div className="mini" style={{ marginTop: 6 }}>
+		      {EXERCISE_INFO[ex].notes[0]}
+		  </div>
+		) : null}
+
+		{EXERCISE_INFO[ex]?.target ? (
+		  <div className="mini" style={{ marginTop: 4, opacity: 0.9 }}>
+		    Target: {EXERCISE_INFO[ex].target}
+		  </div>
+		) : null}
                     </button>
                   );
                 })}
