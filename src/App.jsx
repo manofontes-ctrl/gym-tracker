@@ -6,113 +6,95 @@ const LS_KEY = "gym_tracker_simple_v3";
 const EXERCISE_INFO = {
   "Incline DB Press": {
     sets: "4 × 6–10",
-    target: "Start with a load you can own for 4×8. When all 4 sets hit 10 clean reps, add 2–2.5 kg total next session.",
-    notes: ["Bench ~30° incline", "Shoulder blades back", "Lower slowly to upper chest", "Do not flare elbows too wide"],
+    target: "Hit 10 reps on all sets → increase 2–2.5kg",
+    notes: ["30° incline", "Shoulders back", "Slow eccentric"],
   },
-  "Chest-Supported Row": {
-    sets: "4 × 8–12",
-    target: "Start moderate for 4×10. Add 2.5–5 kg when all 4 sets reach 12 with full control.",
-    notes: ["Chest firmly on bench", "Pull elbows toward hips", "Squeeze shoulder blades", "Avoid jerking weight"],
+  "Flat Machine / Barbell Press": {
+    sets: "4 × 6–10",
+    target: "Progress weight once 10 reps achieved",
+    notes: ["Full ROM", "Control descent"],
+  },
+  "Cable Chest Fly (Mid)": {
+    sets: "3 × 12–15",
+    target: "Focus contraction → increase after 15 clean reps",
+    notes: ["Slight elbow bend", "Squeeze chest"],
   },
   "Seated DB Shoulder Press": {
     sets: "3 × 8–10",
-    target: "Start at a weight you can manage for 3×8 strict. Add 1–2 kg per dumbbell once all sets hit 10.",
-    notes: ["Core tight, back neutral", "Dumbbells slightly forward of head", "Do not arch lower back", "Controlled lockout"],
+    target: "Add weight after 10 reps achieved",
+    notes: ["No lower back arch", "Control movement"],
   },
-  "Neutral-Grip Lat Pulldown": {
-    sets: "3 × 8–12",
-    target: "Choose a load for 3×10 with full range. Increase one plate step when you hit 12 on all sets.",
-    notes: ["Lean slightly back", "Pull elbows toward ribs", "Chest up, shoulders down", "Control the return"],
-  },
-  "Cable Fly (Low to High)": {
-    sets: "3 × 12–15",
-    target: "Use light-moderate load and chase quality. Increase only once 15 reps feel clean with full squeeze.",
-    notes: ["Slight bend in elbows", "Lift arms upward in an arc", "Squeeze chest at top", "Slow eccentric"],
+  "Lateral Raises": {
+    sets: "4 × 12–15",
+    target: "Add reps → then small weight increase",
+    notes: ["Raise to shoulder height", "No swinging"],
   },
   "Face Pull": {
     sets: "3 × 12–15",
-    target: "Keep this strict. Progress in small cable jumps once you hit 15 with a pause each rep.",
-    notes: ["Pull rope toward face", "Elbows high and wide", "Focus on rear delts", "Pause at contraction"],
+    target: "Increase slowly once form is perfect",
+    notes: ["Elbows high", "Pull to face"],
   },
-  "Hammer Curl": {
-    sets: "3 × 10–12",
-    target: "Start at a weight for 3×10 strict. Add 1–2 kg per dumbbell once all sets hit 12.",
-    notes: ["Neutral grip", "Elbows fixed at sides", "No body swing", "Slow lowering"],
-  },
-  "Overhead Rope Extension": {
-    sets: "3 × 10–12",
-    target: "Use a controlled cable load. Increase one step when you hit 12 on all sets with full stretch.",
-    notes: ["Elbows pointing forward", "Stretch triceps fully", "Keep upper arms still", "Control return"],
-  },
-  "Front Squat": {
-    sets: "4 × 5–8",
-    target: "Start lighter than your back squat block. Add 2.5–5 kg when you hit 8 on all 4 sets with upright form.",
-    notes: ["Elbows high", "Chest upright", "Sit between hips", "Drive through midfoot"],
+
+  "Bulgarian Split Squat": {
+    sets: "3 × 8/leg",
+    target: "Increase load once stable",
+    notes: ["Long stance", "Control descent"],
   },
   "Romanian Deadlift": {
     sets: "3 × 6–8",
-    target: "Use a load you can own for 3×6. Add 2.5–5 kg once all sets reach 8 with hamstring control.",
-    notes: ["Slight knee bend", "Push hips backward", "Keep bar close to legs", "Feel hamstring stretch"],
-  },
-  "Rear-Foot Elevated Split Squat": {
-    sets: "3 × 8/leg",
-    target: "Start moderate and build stability first. Increase once all reps are balanced and controlled.",
-    notes: ["Long stance", "Knee tracks over toes", "Torso upright", "Slow controlled descent"],
-  },
-  "Seated Hamstring Curl": {
-    sets: "3 × 10–12",
-    target: "Use a moderate load for 3×10. Increase one plate step after hitting 12 on all sets.",
-    notes: ["Hips fixed in seat", "Full squeeze at bottom", "Control extension", "Avoid momentum"],
-  },
-  "Standing Calf Raise": {
-    sets: "4 × 10–15",
-    target: "Progress slower here: first reach 15 reps with pauses, then add load.",
-    notes: ["Full stretch at bottom", "Pause at top", "Slow tempo", "Do not bounce"],
-  },
-  "Tibialis Raise": {
-    sets: "3 × 15–20",
-    target: "Build reps first. When you own 20 per set, increase difficulty or load slightly.",
-    notes: ["Lean against wall", "Lift toes toward shins", "Control lowering", "Helps running resilience"],
+    target: "Increase 2.5–5kg when 8 reps solid",
+    notes: ["Hinge hips", "Stretch hamstrings"],
   },
   "Step-Up to Knee Drive": {
     sets: "3 × 8/leg",
-    target: "Use bodyweight or light dumbbells first. Add load once all reps stay explosive and stable.",
-    notes: ["Drive through front heel", "Lift opposite knee high", "Keep hips level", "Controlled descent"],
+    target: "Add load after full control",
+    notes: ["Drive knee up", "Balance"],
   },
-  "Weighted Cable Crunch": {
-    sets: "4 × 10–15",
-    target: "Priority lift: add one cable step once you hit 15 on all 4 sets with a full crunch.",
-    notes: ["Curl spine downward", "Do not hinge at hips", "Exhale on crunch", "Slow return"],
+  "Hamstring Curl": {
+    sets: "3 × 10–12",
+    target: "Increase machine weight after 12 reps",
+    notes: ["Slow eccentric", "Full squeeze"],
   },
-  "Hanging Knee / Toe Raise": {
+  "Single-Leg Calf Raise": {
+    sets: "4 × 12–15",
+    target: "Increase reps first → then weight",
+    notes: ["Pause at top", "Full stretch"],
+  },
+  "Glute Bridge Hold": {
+    sets: "3 × 30–45 sec",
+    target: "Increase hold time",
+    notes: ["Squeeze glutes", "Neutral spine"],
+  },
+
+  "Hanging Leg Raises": {
     sets: "4 × 8–12",
-    target: "Build strict reps first. When you hit 12 clean, progress toward toes-to-bar or add ankle load.",
-    notes: ["Posterior pelvic tilt", "Avoid swinging", "Lift knees or toes high", "Slow negative"],
+    target: "Progress to toes-to-bar",
+    notes: ["No swing", "Controlled reps"],
+  },
+  "Cable Woodchopper": {
+    sets: "3 × 12/side",
+    target: "Increase cable load gradually",
+    notes: ["Rotate core", "Control motion"],
+  },
+  "Side Plank Hip Dips": {
+    sets: "3 × 10/side",
+    target: "Increase reps/control",
+    notes: ["Keep body straight"],
   },
   "Ab Wheel Rollout": {
     sets: "3 × 8–12",
-    target: "Increase range before reps. Once full range is controlled for 12, add a fourth set later.",
-    notes: ["Glutes tight", "Neutral spine", "Roll only as far as control allows", "Do not sag lower back"],
+    target: "Increase range before reps",
+    notes: ["Tight core", "No sagging"],
   },
-  "45° Back Extension": {
-    sets: "3 × 10–15",
-    target: "Start bodyweight or light plate. Increase load only after 15 strict reps with glute control.",
-    notes: ["Hinge at hips", "Neutral spine", "Squeeze glutes at top", "Avoid hyperextension"],
+  "Weighted Russian Twists": {
+    sets: "3 × 16–20",
+    target: "Increase weight gradually",
+    notes: ["Rotate fully", "Controlled pace"],
   },
-  "Pallof Press": {
-    sets: "3 × 12/side",
-    target: "Progress cable load in small jumps once all reps stay stable with no torso twist.",
-    notes: ["Stand tall", "Resist rotation", "Core tight", "Slow extension"],
-  },
-  "Side Plank Reach": {
-    sets: "3 × 10/side",
-    target: "Increase control and range first. Then add reps or time before external load.",
-    notes: ["Straight line body", "Reach under then rotate open", "Keep hips lifted"],
-  },
-  "Suitcase Carry": {
-    sets: "3 × 30–45 sec/side",
-    target: "Increase time to 45 sec before increasing dumbbell load.",
-    notes: ["One dumbbell only", "Walk slowly", "Do not lean sideways", "Core tight"],
+  "Hollow Body Hold": {
+    sets: "3 × 30–45 sec",
+    target: "Increase hold duration",
+    notes: ["Lower back flat"],
   },
 };
 
@@ -158,37 +140,33 @@ const DEFAULT = {
       name: "A – Upper Body",
       exercises: [
         "Incline DB Press",
-        "Chest-Supported Row",
+        "Flat Machine / Barbell Press",
+        "Cable Chest Fly (Mid)",
         "Seated DB Shoulder Press",
-        "Neutral-Grip Lat Pulldown",
-        "Cable Fly (Low to High)",
+        "Lateral Raises",
         "Face Pull",
-        "Hammer Curl",
-        "Overhead Rope Extension",
       ],
     },
     B: {
       name: "B – Lower Body (Running)",
       exercises: [
-        "Front Squat",
+        "Bulgarian Split Squat",
         "Romanian Deadlift",
-        "Rear-Foot Elevated Split Squat",
-        "Seated Hamstring Curl",
-        "Standing Calf Raise",
-        "Tibialis Raise",
         "Step-Up to Knee Drive",
+        "Hamstring Curl",
+        "Single-Leg Calf Raise",
+        "Glute Bridge Hold",
       ],
     },
     C: {
       name: "C – Core & Lower Back",
       exercises: [
-        "Weighted Cable Crunch",
-        "Hanging Knee / Toe Raise",
+        "Hanging Leg Raises",
+        "Cable Woodchopper",
+        "Side Plank Hip Dips",
         "Ab Wheel Rollout",
-        "45° Back Extension",
-        "Pallof Press",
-        "Side Plank Reach",
-        "Suitcase Carry",
+        "Weighted Russian Twists",
+        "Hollow Body Hold",
       ],
     },
   },
