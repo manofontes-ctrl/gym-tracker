@@ -4,28 +4,116 @@ const LS_KEY = "gym_tracker_simple_v3";
 
 // --- Quick warm-up / cool-down (5 min each) ---
 const EXERCISE_INFO = {
-  "Incline DB Press": { sets: "4 × 6–10", notes: ["Bench ~30° incline", "Shoulder blades back", "Lower slowly to upper chest", "Do not flare elbows too wide"] },
-  "Chest-Supported Row": { sets: "4 × 8–12", notes: ["Chest firmly on bench", "Pull elbows toward hips", "Squeeze shoulder blades", "Avoid jerking weight"] },
-  "Seated DB Shoulder Press": { sets: "3 × 8–10", notes: ["Core tight, back neutral", "Dumbbells slightly forward of head", "Do not arch lower back", "Controlled lockout"] },
-  "Neutral-Grip Lat Pulldown": { sets: "3 × 8–12", notes: ["Lean slightly back", "Pull elbows toward ribs", "Chest up, shoulders down", "Control the return"] },
-  "Cable Fly (Low to High)": { sets: "3 × 12–15", notes: ["Slight bend in elbows", "Lift arms upward in an arc", "Squeeze chest at top", "Slow eccentric"] },
-  "Face Pull": { sets: "3 × 12–15", notes: ["Pull rope toward face", "Elbows high and wide", "Focus on rear delts", "Pause at contraction"] },
-  "Hammer Curl": { sets: "3 × 10–12", notes: ["Neutral grip", "Elbows fixed at sides", "No body swing", "Slow lowering"] },
-  "Overhead Rope Extension": { sets: "3 × 10–12", notes: ["Elbows pointing forward", "Stretch triceps fully", "Keep upper arms still", "Control return"] },
-  "Front Squat": { sets: "4 × 5–8", notes: ["Elbows high", "Chest upright", "Sit between hips", "Drive through midfoot"] },
-  "Romanian Deadlift": { sets: "3 × 6–8", notes: ["Slight knee bend", "Push hips backward", "Keep bar close to legs", "Feel hamstring stretch"] },
-  "Rear-Foot Elevated Split Squat": { sets: "3 × 8/leg", notes: ["Long stance", "Knee tracks over toes", "Torso upright", "Slow controlled descent"] },
-  "Seated Hamstring Curl": { sets: "3 × 10–12", notes: ["Hips fixed in seat", "Full squeeze at bottom", "Control extension", "Avoid momentum"] },
-  "Standing Calf Raise": { sets: "4 × 10–15", notes: ["Full stretch at bottom", "Pause at top", "Slow tempo", "Do not bounce"] },
-  "Tibialis Raise": { sets: "3 × 15–20", notes: ["Lean against wall", "Lift toes toward shins", "Control lowering", "Helps running resilience"] },
-  "Step-Up to Knee Drive": { sets: "3 × 8/leg", notes: ["Drive through front heel", "Lift opposite knee high", "Keep hips level", "Controlled descent"] },
-  "Weighted Cable Crunch": { sets: "4 × 10–15", notes: ["Curl spine downward", "Do not hinge at hips", "Exhale on crunch", "Slow return"] },
-  "Hanging Knee / Toe Raise": { sets: "4 × 8–12", notes: ["Posterior pelvic tilt", "Avoid swinging", "Lift knees or toes high", "Slow negative"] },
-  "Ab Wheel Rollout": { sets: "3 × 8–12", notes: ["Glutes tight", "Neutral spine", "Roll only as far as control allows", "Do not sag lower back"] },
-  "45° Back Extension": { sets: "3 × 10–15", notes: ["Hinge at hips", "Neutral spine", "Squeeze glutes at top", "Avoid hyperextension"] },
-  "Pallof Press": { sets: "3 × 12/side", notes: ["Stand tall", "Resist rotation", "Core tight", "Slow extension"] },
-  "Side Plank Reach": { sets: "3 × 10/side", notes: ["Straight line body", "Reach under then rotate open", "Keep hips lifted"] },
-  "Suitcase Carry": { sets: "3 × 30–45 sec/side", notes: ["One dumbbell only", "Walk slowly", "Do not lean sideways", "Core tight"] },
+  "Incline DB Press": {
+    sets: "4 × 6–10",
+    target: "Start with a load you can own for 4×8. When all 4 sets hit 10 clean reps, add 2–2.5 kg total next session.",
+    notes: ["Bench ~30° incline", "Shoulder blades back", "Lower slowly to upper chest", "Do not flare elbows too wide"],
+  },
+  "Chest-Supported Row": {
+    sets: "4 × 8–12",
+    target: "Start moderate for 4×10. Add 2.5–5 kg when all 4 sets reach 12 with full control.",
+    notes: ["Chest firmly on bench", "Pull elbows toward hips", "Squeeze shoulder blades", "Avoid jerking weight"],
+  },
+  "Seated DB Shoulder Press": {
+    sets: "3 × 8–10",
+    target: "Start at a weight you can manage for 3×8 strict. Add 1–2 kg per dumbbell once all sets hit 10.",
+    notes: ["Core tight, back neutral", "Dumbbells slightly forward of head", "Do not arch lower back", "Controlled lockout"],
+  },
+  "Neutral-Grip Lat Pulldown": {
+    sets: "3 × 8–12",
+    target: "Choose a load for 3×10 with full range. Increase one plate step when you hit 12 on all sets.",
+    notes: ["Lean slightly back", "Pull elbows toward ribs", "Chest up, shoulders down", "Control the return"],
+  },
+  "Cable Fly (Low to High)": {
+    sets: "3 × 12–15",
+    target: "Use light-moderate load and chase quality. Increase only once 15 reps feel clean with full squeeze.",
+    notes: ["Slight bend in elbows", "Lift arms upward in an arc", "Squeeze chest at top", "Slow eccentric"],
+  },
+  "Face Pull": {
+    sets: "3 × 12–15",
+    target: "Keep this strict. Progress in small cable jumps once you hit 15 with a pause each rep.",
+    notes: ["Pull rope toward face", "Elbows high and wide", "Focus on rear delts", "Pause at contraction"],
+  },
+  "Hammer Curl": {
+    sets: "3 × 10–12",
+    target: "Start at a weight for 3×10 strict. Add 1–2 kg per dumbbell once all sets hit 12.",
+    notes: ["Neutral grip", "Elbows fixed at sides", "No body swing", "Slow lowering"],
+  },
+  "Overhead Rope Extension": {
+    sets: "3 × 10–12",
+    target: "Use a controlled cable load. Increase one step when you hit 12 on all sets with full stretch.",
+    notes: ["Elbows pointing forward", "Stretch triceps fully", "Keep upper arms still", "Control return"],
+  },
+  "Front Squat": {
+    sets: "4 × 5–8",
+    target: "Start lighter than your back squat block. Add 2.5–5 kg when you hit 8 on all 4 sets with upright form.",
+    notes: ["Elbows high", "Chest upright", "Sit between hips", "Drive through midfoot"],
+  },
+  "Romanian Deadlift": {
+    sets: "3 × 6–8",
+    target: "Use a load you can own for 3×6. Add 2.5–5 kg once all sets reach 8 with hamstring control.",
+    notes: ["Slight knee bend", "Push hips backward", "Keep bar close to legs", "Feel hamstring stretch"],
+  },
+  "Rear-Foot Elevated Split Squat": {
+    sets: "3 × 8/leg",
+    target: "Start moderate and build stability first. Increase once all reps are balanced and controlled.",
+    notes: ["Long stance", "Knee tracks over toes", "Torso upright", "Slow controlled descent"],
+  },
+  "Seated Hamstring Curl": {
+    sets: "3 × 10–12",
+    target: "Use a moderate load for 3×10. Increase one plate step after hitting 12 on all sets.",
+    notes: ["Hips fixed in seat", "Full squeeze at bottom", "Control extension", "Avoid momentum"],
+  },
+  "Standing Calf Raise": {
+    sets: "4 × 10–15",
+    target: "Progress slower here: first reach 15 reps with pauses, then add load.",
+    notes: ["Full stretch at bottom", "Pause at top", "Slow tempo", "Do not bounce"],
+  },
+  "Tibialis Raise": {
+    sets: "3 × 15–20",
+    target: "Build reps first. When you own 20 per set, increase difficulty or load slightly.",
+    notes: ["Lean against wall", "Lift toes toward shins", "Control lowering", "Helps running resilience"],
+  },
+  "Step-Up to Knee Drive": {
+    sets: "3 × 8/leg",
+    target: "Use bodyweight or light dumbbells first. Add load once all reps stay explosive and stable.",
+    notes: ["Drive through front heel", "Lift opposite knee high", "Keep hips level", "Controlled descent"],
+  },
+  "Weighted Cable Crunch": {
+    sets: "4 × 10–15",
+    target: "Priority lift: add one cable step once you hit 15 on all 4 sets with a full crunch.",
+    notes: ["Curl spine downward", "Do not hinge at hips", "Exhale on crunch", "Slow return"],
+  },
+  "Hanging Knee / Toe Raise": {
+    sets: "4 × 8–12",
+    target: "Build strict reps first. When you hit 12 clean, progress toward toes-to-bar or add ankle load.",
+    notes: ["Posterior pelvic tilt", "Avoid swinging", "Lift knees or toes high", "Slow negative"],
+  },
+  "Ab Wheel Rollout": {
+    sets: "3 × 8–12",
+    target: "Increase range before reps. Once full range is controlled for 12, add a fourth set later.",
+    notes: ["Glutes tight", "Neutral spine", "Roll only as far as control allows", "Do not sag lower back"],
+  },
+  "45° Back Extension": {
+    sets: "3 × 10–15",
+    target: "Start bodyweight or light plate. Increase load only after 15 strict reps with glute control.",
+    notes: ["Hinge at hips", "Neutral spine", "Squeeze glutes at top", "Avoid hyperextension"],
+  },
+  "Pallof Press": {
+    sets: "3 × 12/side",
+    target: "Progress cable load in small jumps once all reps stay stable with no torso twist.",
+    notes: ["Stand tall", "Resist rotation", "Core tight", "Slow extension"],
+  },
+  "Side Plank Reach": {
+    sets: "3 × 10/side",
+    target: "Increase control and range first. Then add reps or time before external load.",
+    notes: ["Straight line body", "Reach under then rotate open", "Keep hips lifted"],
+  },
+  "Suitcase Carry": {
+    sets: "3 × 30–45 sec/side",
+    target: "Increase time to 45 sec before increasing dumbbell load.",
+    notes: ["One dumbbell only", "Walk slowly", "Do not lean sideways", "Core tight"],
+  },
 };
 
 const WARMUP = {
@@ -199,7 +287,8 @@ function toCSV(logs) {
       g(2, "r"),
       g(3, "w"),
       g(3, "r"),
-      (l.notes || "").split("\n").join(" "),
+      (l.notes || "").split("
+").join(" "),
       Math.round(vol),
     ];
 
@@ -247,6 +336,7 @@ export default function App() {
 
   const session = data.sessions[sessionKey];
   const selectedInfo = selected ? EXERCISE_INFO[selected] : null;
+  const selectedLastLog = selected ? logsSorted.find((l) => l.exerciseName === selected) : null;
 
   const exercises = useMemo(() => {
     const q = search.trim().toLowerCase();
@@ -468,8 +558,9 @@ export default function App() {
     .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
     .mini{font-size:12px;color:var(--muted2)}
     .toggle{font-size:12px;color:var(--muted);border:1px solid var(--border);background:rgba(255,255,255,.03);border-radius:999px;padding:6px 10px;cursor:pointer;}
-    .modalOverlay{position:fixed;inset:0;background:rgba(0,0,0,.75);display:flex;place-items:center;padding:16px;}
-    .modal{width:100%;max-width:420px;background:#111827; /* solid dark */  color:white;border-radius:16px;padding:16px;box-shadow:0 10px 30px rgba(0,0,0,0.5);max-height:80vh;overflow-y:auto;}
+    .modalOverlay{position:fixed;inset:0;background:rgba(0,0,0,.45);display:grid;place-items:center;padding:14px;}
+    .modal{width:100%;max-width:520px;background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+           border:1px solid var(--border);border-radius:20px;padding:14px;}
     .setGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
     .kpi{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
     .kpiCard{border:1px solid var(--border);border-radius:18px;padding:12px;background:rgba(255,255,255,.03)}
@@ -585,6 +676,9 @@ export default function App() {
                       <div className="cardSub">{sub}</div>
                       {EXERCISE_INFO[ex]?.notes?.[0] ? (
                         <div className="mini" style={{ marginTop: 6 }}>{EXERCISE_INFO[ex].notes[0]}</div>
+                      {EXERCISE_INFO[ex]?.target ? (
+                        <div className="mini" style={{ marginTop: 4, opacity: 0.9 }}>Target: {EXERCISE_INFO[ex].target}</div>
+                      ) : null}
                       ) : null}
                     </button>
                   );
@@ -639,10 +733,24 @@ export default function App() {
                       <div className="pills">
                         <span>{pill(`Recommended sets: ${selectedInfo.sets}`)}</span>
                       </div>
+                      {selectedInfo.target ? (
+                        <div className="mini" style={{ marginTop: 8, lineHeight: 1.45 }}>
+                          <strong>Progression target:</strong> {selectedInfo.target}
+                        </div>
+                      ) : null}
                       <div className="table" style={{ marginTop: 10 }}>
                         {selectedInfo.notes.map((n, i) => (
                           <div key={i} className="mini" style={{ lineHeight: 1.4 }}>• {n}</div>
                         ))}
+                      </div>
+                    </div>
+                  ) : null}
+
+                  {selectedLastLog?.notes ? (
+                    <div style={{ marginTop: 12 }}>
+                      <div className="mini" style={{ fontWeight: 900, color: "var(--muted)" }}>Last note to self</div>
+                      <div className="tableRow" style={{ marginTop: 8 }}>
+                        <div className="mini" style={{ lineHeight: 1.45 }}>{selectedLastLog.notes}</div>
                       </div>
                     </div>
                   ) : null}
@@ -672,9 +780,17 @@ export default function App() {
                     ))}
                   </div>
 
+                  <button
+                    className="btn"
+                    onClick={() => setSets((prev) => [...prev, { w: "", r: "" }])}
+                    style={{ marginTop: 10 }}
+                  >
+                    + Add Set
+                  </button>
+
                   <input
                     className="input"
-                    placeholder="Notes (optional) e.g., RPE 8"
+                    placeholder={selectedLastLog?.notes ? "New note (last note shown above)" : "Notes (optional) e.g., RPE 8"}
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
                   />
