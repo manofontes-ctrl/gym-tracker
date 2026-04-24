@@ -313,7 +313,6 @@ export default function App() {
 
   const session = data.sessions[sessionKey];
   const selectedInfo = selected ? EXERCISE_INFO[selected] : null;
-  const selectedLastLog = selected ? logsSorted.find((l) => l.exerciseName === selected) : null;
 
   const exercises = useMemo(() => {
     const q = search.trim().toLowerCase();
@@ -323,6 +322,7 @@ export default function App() {
   }, [session.exercises, search]);
 
   const logsSorted = useMemo(() => [...data.logs].sort((a, b) => b.ts - a.ts), [data.logs]);
+  const selectedLastLog = selected ? logsSorted.find((l) => l.exerciseName === selected) : null;
   const recent = useMemo(() => logsSorted.slice(0, 12), [logsSorted]);
 
   const volumeOfLog = (l) =>
