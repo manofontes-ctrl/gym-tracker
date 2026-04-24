@@ -535,9 +535,9 @@ export default function App() {
     .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
     .mini{font-size:12px;color:var(--muted2)}
     .toggle{font-size:12px;color:var(--muted);border:1px solid var(--border);background:rgba(255,255,255,.03);border-radius:999px;padding:6px 10px;cursor:pointer;}
-    .modalOverlay{position:fixed;inset:0;background:rgba(0,0,0,.45);display:grid;place-items:center;padding:14px;}
-    .modal{width:100%;max-width:520px;background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-           border:1px solid var(--border);border-radius:20px;padding:14px;}
+    .modalOverlay{position:fixed;inset:0;background:rgba(0,0,0,.78);display:grid;place-items:center;padding:14px;z-index: 9999;}
+    .modal{width:100%;max-width:520px;background:rgba(18,22,35,0.96);
+           border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:18px;box-shadow: 0 20px 60px rgba(0,0,0,0.45);}
     .setGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
     .kpi{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
     .kpiCard{border:1px solid var(--border);border-radius:18px;padding:12px;background:rgba(255,255,255,.03)}
