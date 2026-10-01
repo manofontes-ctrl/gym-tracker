@@ -9,92 +9,97 @@ const EXERCISE_INFO = {
     target: "Hit 10 reps on all sets → increase 2–2.5kg",
     notes: ["30° incline", "Shoulders back", "Slow eccentric"],
   },
-  "Flat Machine / Barbell Press": {
-    sets: "4 × 6–10",
-    target: "Progress weight once 10 reps achieved",
+  "Chest-Supported Row": {
+    sets: "4 × 8–12",
+    target: "Hit 12 reps on all sets → increase load",
+    notes: ["Chest supported", "Pull elbows back", "Controlled eccentric"],
+  },
+  "Flat Machine Press": {
+    sets: "3 × 8–12",
+    target: "Hit 12 reps on all sets → increase load",
     notes: ["Full ROM", "Control descent"],
   },
-  "Cable Chest Fly (Mid)": {
-    sets: "3 × 12–15",
-    target: "Focus contraction → increase after 15 clean reps",
-    notes: ["Slight elbow bend", "Squeeze chest"],
+  "Neutral-Grip Lat Pulldown": {
+    sets: "3 × 8–12",
+    target: "Hit 12 reps with good form → increase load",
+    notes: ["Neutral grip", "Pull elbows down", "Avoid swinging"],
   },
   "Seated DB Shoulder Press": {
-    sets: "3 × 8–10",
-    target: "Add weight after 10 reps achieved",
+    sets: "3 × 8–12",
+    target: "Hit 12 reps on all sets → increase load",
     notes: ["No lower back arch", "Control movement"],
   },
   "Lateral Raises": {
-    sets: "4 × 12–15",
-    target: "Add reps → then small weight increase",
+    sets: "3 × 12–15",
+    target: "Reach 15 clean reps → small weight increase",
     notes: ["Raise to shoulder height", "No swinging"],
   },
   "Face Pull": {
-    sets: "3 × 12–15",
+    sets: "2 × 15–20",
     target: "Increase slowly once form is perfect",
     notes: ["Elbows high", "Pull to face"],
   },
 
   "Bulgarian Split Squat": {
-    sets: "3 × 8/leg",
-    target: "Increase load once stable",
+    sets: "3 × 8–10/leg",
+    target: "Reach 10/leg with stability → increase load",
     notes: ["Long stance", "Control descent"],
   },
   "Romanian Deadlift": {
-    sets: "3 × 6–8",
-    target: "Increase 2.5–5kg when 8 reps solid",
-    notes: ["Hinge hips", "Stretch hamstrings"],
+    sets: "3 × 8–10",
+    target: "Increase gradually only when technique is solid",
+    notes: ["Hinge hips", "Neutral spine", "Do not chase load if back discomfort appears"],
   },
   "Step-Up to Knee Drive": {
     sets: "3 × 8/leg",
     target: "Add load after full control",
     notes: ["Drive knee up", "Balance"],
   },
-  "Hamstring Curl": {
+  "Seated Hamstring Curl": {
     sets: "3 × 10–12",
-    target: "Increase machine weight after 12 reps",
+    target: "Increase machine weight after 12 clean reps",
     notes: ["Slow eccentric", "Full squeeze"],
   },
   "Single-Leg Calf Raise": {
-    sets: "4 × 12–15",
+    sets: "3 × 12–15",
     target: "Increase reps first → then weight",
     notes: ["Pause at top", "Full stretch"],
   },
-  "Glute Bridge Hold": {
+  "Front Plank": {
     sets: "3 × 30–45 sec",
-    target: "Increase hold time",
-    notes: ["Squeeze glutes", "Neutral spine"],
+    target: "Increase hold time while keeping a neutral spine",
+    notes: ["Brace abdomen", "Squeeze glutes", "No sagging"],
+  },
+  "Side Plank": {
+    sets: "2–3 × 20–40 sec/side",
+    target: "Increase hold time with hips stacked",
+    notes: ["Straight line", "Hips high", "Controlled breathing"],
   },
 
-  "Hanging Leg Raises": {
-    sets: "4 × 8–12",
-    target: "Progress to toes-to-bar",
-    notes: ["No swing", "Controlled reps"],
-  },
-  "Cable Woodchopper": {
-    sets: "3 × 12/side",
-    target: "Increase cable load gradually",
-    notes: ["Rotate core", "Control motion"],
-  },
-  "Side Plank Hip Dips": {
-    sets: "3 × 10/side",
-    target: "Increase reps/control",
-    notes: ["Keep body straight"],
-  },
   "Ab Wheel Rollout": {
     sets: "3 × 8–12",
     target: "Increase range before reps",
     notes: ["Tight core", "No sagging"],
   },
-  "Weighted Russian Twists": {
-    sets: "3 × 16–20",
-    target: "Increase weight gradually",
-    notes: ["Rotate fully", "Controlled pace"],
+  "Hanging Leg Raise": {
+    sets: "3 × 10–15",
+    target: "Increase reps → controlled toes-to-bar progression",
+    notes: ["No swing", "Posterior pelvic tilt"],
   },
-  "Hollow Body Hold": {
-    sets: "3 × 30–45 sec",
-    target: "Increase hold duration",
-    notes: ["Lower back flat"],
+  "Pallof Press": {
+    sets: "3 × 10–12/side",
+    target: "Increase load while resisting rotation",
+    notes: ["Brace core", "Stay square"],
+  },
+  "45° Back Extension": {
+    sets: "3 × 10–15",
+    target: "Control the movement → add load gradually",
+    notes: ["Neutral spine", "Move through hips", "Do not hyperextend"],
+  },
+  "Suitcase Carry": {
+    sets: "3 × 30–45 sec/side",
+    target: "Increase time or load while staying upright",
+    notes: ["Tall posture", "Do not lean", "Brace core"],
   },
 };
 
@@ -140,37 +145,40 @@ const DEFAULT = {
       name: "A – Upper Body",
       exercises: [
         "Incline DB Press",
-        "Flat Machine / Barbell Press",
-        "Cable Chest Fly (Mid)",
+        "Chest-Supported Row",
+        "Flat Machine Press",
+        "Neutral-Grip Lat Pulldown",
         "Seated DB Shoulder Press",
         "Lateral Raises",
         "Face Pull",
       ],
     },
     B: {
-      name: "B – Lower Body (Running)",
+      name: "B – Lower Body + Running + Lower Back",
       exercises: [
         "Bulgarian Split Squat",
         "Romanian Deadlift",
         "Step-Up to Knee Drive",
-        "Hamstring Curl",
+        "Seated Hamstring Curl",
         "Single-Leg Calf Raise",
-        "Glute Bridge Hold",
+        "Front Plank",
+        "Side Plank",
       ],
     },
     C: {
-      name: "C – Core & Lower Back",
+      name: "C – Core + Lower Back",
       exercises: [
-        "Hanging Leg Raises",
-        "Cable Woodchopper",
-        "Side Plank Hip Dips",
         "Ab Wheel Rollout",
-        "Weighted Russian Twists",
-        "Hollow Body Hold",
+        "Hanging Leg Raise",
+        "Pallof Press",
+        "Side Plank",
+        "45° Back Extension",
+        "Suitcase Carry",
       ],
     },
   },
   logs: [],
+  bodyWeight: [],
 };
 
 function uid() {
@@ -275,6 +283,15 @@ function toCSV(logs) {
   return [headers.join(","), ...rows].join("\n");
 }
 
+function toBodyWeightCSV(entries) {
+  const rows = [["timestamp", "weight_kg"]].concat(
+    [...entries]
+      .sort((a, b) => a.ts - b.ts)
+      .map((x) => [new Date(x.ts).toISOString(), x.weightKg])
+  );
+  return rows.map((row) => row.map((v) => `"${String(v).replace(/"/g, '""')}"`).join(",")).join("\n");
+}
+
 function pill(text) {
   return (
     <span
@@ -307,6 +324,7 @@ export default function App() {
   const [notes, setNotes] = useState("");
   const [showWU, setShowWU] = useState(true);
   const [showCD, setShowCD] = useState(false);
+  const [bodyWeightInput, setBodyWeightInput] = useState("");
 
   useEffect(() => setData(load()), []);
   useEffect(() => save(data), [data]);
@@ -409,12 +427,67 @@ export default function App() {
 
     const maxSessionVolume = sessionTotals.reduce((m, x) => Math.max(m, x.volume), 0) || 1;
 
+    // Workout frequency: distinct calendar dates by week.
+    const weeklySessionsMap = new Map();
+    const sessionDateKeys = new Map();
+    for (const l of data.logs) {
+      const weekTs = startOfWeekTs(l.ts);
+      const dateKey = new Date(l.ts).toISOString().slice(0, 10);
+      if (!sessionDateKeys.has(weekTs)) sessionDateKeys.set(weekTs, new Set());
+      sessionDateKeys.get(weekTs).add(dateKey);
+    }
+    for (const [weekTs, dates] of sessionDateKeys.entries()) {
+      weeklySessionsMap.set(weekTs, dates.size);
+    }
+    const frequencySeries = [...weeklySessionsMap.entries()]
+      .sort((a, b) => a[0] - b[0])
+      .slice(-8)
+      .map(([weekTs, sessions]) => ({
+        weekTs,
+        label: new Date(weekTs).toLocaleDateString(undefined, { month: "short", day: "2-digit" }),
+        sessions,
+      }));
+    const maxFrequency = frequencySeries.reduce((m, x) => Math.max(m, x.sessions), 0) || 1;
+
+    // Weighted average load = Σ(weight × reps) / Σ(reps).
+    const weighted = new Map();
+    for (const l of data.logs) {
+      const key = l.exerciseName;
+      const prev = weighted.get(key) || { exercise: key, weightedLoad: 0, reps: 0, sets: 0 };
+      for (const s of l.sets || []) {
+        const w = Number(s.w);
+        const r = Number(s.r);
+        if (Number.isFinite(w) && Number.isFinite(r) && r > 0) {
+          prev.weightedLoad += w * r;
+          prev.reps += r;
+          prev.sets += 1;
+        }
+      }
+      weighted.set(key, prev);
+    }
+    const weightedAverage = [...weighted.values()]
+      .map((x) => ({
+        ...x,
+        averageLoad: x.reps ? x.weightedLoad / x.reps : 0,
+      }))
+      .filter((x) => x.averageLoad > 0)
+      .sort((a, b) => b.averageLoad - a.averageLoad);
+
+    const totalReps = data.logs.reduce(
+      (acc, l) => acc + (l.sets || []).reduce((sAcc, s) => sAcc + (Number(s.r) || 0), 0),
+      0
+    );
+
     return {
       byExercise: [...byExercise.values()].sort((a, b) => a.exercise.localeCompare(b.exercise)),
       weeklySeries,
       maxWeekly,
       sessionTotals,
       maxSessionVolume,
+      frequencySeries,
+      maxFrequency,
+      weightedAverage,
+      totalReps,
     };
   }, [data.logs]);
 
@@ -461,9 +534,42 @@ export default function App() {
 
   const delLog = (id) => setData((d) => ({ ...d, logs: d.logs.filter((l) => l.id !== id) }));
 
+  const bodyWeightStats = useMemo(() => {
+    const entries = [...(data.bodyWeight || [])].sort((a, b) => a.ts - b.ts);
+    const latest = entries[entries.length - 1]?.weightKg ?? null;
+    const cutoff7 = Date.now() - 7 * 24 * 3600 * 1000;
+    const cutoff28 = Date.now() - 28 * 24 * 3600 * 1000;
+    const avg = (xs) => xs.length ? xs.reduce((a, x) => a + x.weightKg, 0) / xs.length : null;
+    const avg7 = avg(entries.filter((x) => x.ts >= cutoff7));
+    const avg28 = avg(entries.filter((x) => x.ts >= cutoff28));
+    const older28 = entries.filter((x) => x.ts < cutoff28).slice(-4);
+    const olderAvg = avg(older28);
+    const trend = avg28 != null && olderAvg != null ? avg28 - olderAvg : null;
+    const series = entries.slice(-12).map((x) => ({
+      ...x,
+      label: new Date(x.ts).toLocaleDateString(undefined, { month: "short", day: "2-digit" }),
+    }));
+    return { entries, latest, avg7, avg28, trend, series };
+  }, [data.bodyWeight]);
+
+  const addBodyWeight = () => {
+    const weightKg = Number(String(bodyWeightInput).replace(",", "."));
+    if (!Number.isFinite(weightKg) || weightKg <= 0 || weightKg > 300) return;
+    setData((d) => ({
+      ...d,
+      bodyWeight: [...(d.bodyWeight || []), { id: uid(), ts: Date.now(), weightKg }],
+    }));
+    setBodyWeightInput("");
+  };
+
   const exportCSV = () => {
     const csv = toCSV([...data.logs].sort((a, b) => a.ts - b.ts));
     download(`gym_logs_${new Date().toISOString().slice(0, 10)}.csv`, csv, "text/csv");
+  };
+
+  const exportBodyWeightCSV = () => {
+    const csv = toBodyWeightCSV(data.bodyWeight || []);
+    download(`body_weight_${new Date().toISOString().slice(0, 10)}.csv`, csv, "text/csv");
   };
 
   const exportJSON = () =>
@@ -548,6 +654,12 @@ export default function App() {
     .table{display:grid;gap:8px;margin-top:10px}
     .tableRow{border:1px solid var(--border);border-radius:18px;padding:12px;background:rgba(255,255,255,.03)}
     .badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);}
+    .chart{margin-top:10px;height:130px;display:flex;align-items:flex-end;gap:6px;padding:10px 4px 0;}
+    .chartBar{flex:1;min-width:6px;border-radius:7px 7px 3px 3px;background:rgba(110,231,255,.22);border:1px solid rgba(110,231,255,.12);position:relative;}
+    .chartBarLabel{position:absolute;left:50%;transform:translateX(-50%);bottom:-20px;font-size:9px;color:var(--muted2);white-space:nowrap;}
+    .chartValue{position:absolute;left:50%;transform:translateX(-50%);top:-16px;font-size:9px;color:var(--muted);white-space:nowrap;}
+    .metricRow{display:flex;gap:8px;overflow-x:auto;margin-top:10px;}
+    .metricCard{min-width:92px;border:1px solid var(--border);border-radius:14px;padding:10px;background:rgba(255,255,255,.03);}
   `;
 
   return (
@@ -852,6 +964,135 @@ export default function App() {
                       {x.label}
                     </div>
                   ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="panel">
+              <div className="panelHead">
+                <div>
+                  <div className="h">Body weight</div>
+                  <div className="muted">Track Garmin weigh-ins here too; trends matter more than single readings.</div>
+                </div>
+                <button className="toggle" onClick={exportBodyWeightCSV}>Export</button>
+              </div>
+
+              <div className="setGrid">
+                <input
+                  className="input"
+                  inputMode="decimal"
+                  placeholder="Weight in kg"
+                  value={bodyWeightInput}
+                  onChange={(e) => setBodyWeightInput(e.target.value)}
+                  onKeyDown={(e) => { if (e.key === "Enter") addBodyWeight(); }}
+                />
+                <button className="btn btnPrimary" onClick={addBodyWeight}>Add weight</button>
+              </div>
+
+              <div className="metricRow">
+                <div className="metricCard">
+                  <div className="kpiLabel">Latest</div>
+                  <div className="kpiValue">{bodyWeightStats.latest != null ? `${bodyWeightStats.latest.toFixed(1)} kg` : "—"}</div>
+                </div>
+                <div className="metricCard">
+                  <div className="kpiLabel">7-day avg</div>
+                  <div className="kpiValue">{bodyWeightStats.avg7 != null ? `${bodyWeightStats.avg7.toFixed(1)} kg` : "—"}</div>
+                </div>
+                <div className="metricCard">
+                  <div className="kpiLabel">28-day avg</div>
+                  <div className="kpiValue">{bodyWeightStats.avg28 != null ? `${bodyWeightStats.avg28.toFixed(1)} kg` : "—"}</div>
+                </div>
+              </div>
+
+              {bodyWeightStats.trend != null ? (
+                <div className="mini" style={{ marginTop: 10 }}>
+                  4-week trend: {bodyWeightStats.trend >= 0 ? "+" : ""}{bodyWeightStats.trend.toFixed(1)} kg
+                </div>
+              ) : null}
+
+              {bodyWeightStats.series.length ? (
+                <div style={{ marginTop: 16 }}>
+                  <div className="mini" style={{ fontWeight: 900, color: "var(--muted)" }}>Recent weigh-ins</div>
+                  <div className="chart">
+                    {(() => {
+                      const vals = bodyWeightStats.series.map((x) => x.weightKg);
+                      const min = Math.min(...vals);
+                      const max = Math.max(...vals);
+                      const range = Math.max(max - min, 0.5);
+                      return bodyWeightStats.series.map((x) => {
+                        const h = 20 + ((x.weightKg - min) / range) * 80;
+                        return (
+                          <div key={x.id} className="chartBar" style={{ height: `${h}px` }} title={`${x.weightKg.toFixed(1)} kg`}>
+                            <span className="chartValue">{x.weightKg.toFixed(1)}</span>
+                            <span className="chartBarLabel">{x.label}</span>
+                          </div>
+                        );
+                      });
+                    })()}
+                  </div>
+                </div>
+              ) : (
+                <div className="muted" style={{ marginTop: 12 }}>
+                  Add your Garmin measurements here once or a few times per week.
+                </div>
+              )}
+            </div>
+
+            <div className="panel">
+              <div className="panelHead">
+                <div>
+                  <div className="h">Training frequency</div>
+                  <div className="muted">Distinct workout days per week</div>
+                </div>
+              </div>
+              <div className="chart" style={{ marginBottom: 18 }}>
+                {stats.frequencySeries.length ? stats.frequencySeries.map((x) => {
+                  const h = 20 + (x.sessions / stats.maxFrequency) * 80;
+                  return (
+                    <div key={x.weekTs} className="chartBar" style={{ height: `${h}px` }} title={`${x.sessions} workout days`}>
+                      <span className="chartValue">{x.sessions}</span>
+                      <span className="chartBarLabel">{x.label}</span>
+                    </div>
+                  );
+                }) : <div className="muted">No frequency data yet.</div>}
+              </div>
+            </div>
+
+            <div className="panel">
+              <div className="panelHead">
+                <div>
+                  <div className="h">Weighted average load</div>
+                  <div className="muted">Σ(weight × reps) ÷ Σ(reps), across all logged sets</div>
+                </div>
+              </div>
+              <div className="table">
+                {stats.weightedAverage.slice(0, 12).map((x) => (
+                  <div key={x.exercise} className="tableRow">
+                    <div className="row">
+                      <div style={{ fontWeight: 950 }}>{x.exercise}</div>
+                      <div className="mini">{x.averageLoad.toFixed(1)} kg</div>
+                    </div>
+                    <div className="mini" style={{ marginTop: 5 }}>{x.sets} weighted sets · {x.reps} reps</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="panel">
+              <div className="panelHead">
+                <div>
+                  <div className="h">Training totals</div>
+                  <div className="muted">Useful context alongside body-weight trends</div>
+                </div>
+              </div>
+              <div className="kpi">
+                <div className="kpiCard">
+                  <div className="kpiLabel">Total reps</div>
+                  <div className="kpiValue">{Math.round(stats.totalReps).toLocaleString()}</div>
+                </div>
+                <div className="kpiCard">
+                  <div className="kpiLabel">Workout days</div>
+                  <div className="kpiValue">{new Set(data.logs.map((l) => new Date(l.ts).toISOString().slice(0, 10))).size}</div>
                 </div>
               </div>
             </div>
